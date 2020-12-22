@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Counter from './counter';
+import Counter from '../counter/counter';
 
 class Counters extends Component {
 	render() {
@@ -7,6 +7,7 @@ class Counters extends Component {
 		return (
 			<div>
 				<button
+					aria-label="refresh"
 					className="btn btn-success m-2"
 					onClick={onReset}
 					disabled={counters.length === 0 ? 'disabled' : ''}>

@@ -8,6 +8,7 @@ import renderer from 'react-test-renderer';
 
 import Counter from '../counter';
 import userEvent from '@testing-library/user-event';
+
 describe('It Renders without Crashing', () => {
 	test(`Testing Component doesn't Crash`, () => {
 		const props = {
@@ -78,8 +79,8 @@ describe('It Renders without Crashing', () => {
 			onDecrement: jest.fn(),
 			onDelete: jest.fn(),
 		};
-		const { getByTestId } = render(<Counter {...props}></Counter>);
-		fireEvent.click(getByTestId('delete'));
+		render(<Counter {...props}></Counter>);
+		fireEvent.click(screen.getByRole('button', { name: 'delete' }));
 		expect(props.onDelete).toHaveBeenCalledTimes(1);
 	});
 });

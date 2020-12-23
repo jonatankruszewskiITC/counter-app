@@ -13,7 +13,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=jest-environment-jsdom-sixteen",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -35,6 +35,7 @@
     "@testing-library/user-event": "^12.6.0",
     "eslint-plugin-jest-dom": "^3.6.4",
     "eslint-plugin-testing-library": "^3.10.1",
+    "jest-environment-jsdom-sixteen": "^1.0.3",
     "react-test-renderer": "^17.0.1"
   }
 }

@@ -36,11 +36,9 @@ describe('It Renderrs without Crashing', () => {
 				{ value: 3, id: 3 },
 			],
 			onReset: jest.fn(),
-			onIncrement: jest.fn(),
-			onDelete: jest.fn(),
-			onDecrement: jest.fn(),
 			onRestart: jest.fn(),
 		};
+
 		render(<Counters {...props}></Counters>);
 		const refreshButton = screen.getByRole('button', { name: 'refresh' });
 		userEvent.click(refreshButton);
@@ -66,5 +64,52 @@ describe('It Renderrs without Crashing', () => {
 		render(<Counters {...props}></Counters>);
 		const counters = screen.getAllByText('Mocked Counter');
 		expect(counters).toHaveLength(3);
+	});
+
+	test(`Renders The right amount of counters`, () => {
+		const props = {
+			counters: [],
+			onReset: jest.fn(),
+			onIncrement: jest.fn(),
+			onDelete: jest.fn(),
+			onDecrement: jest.fn(),
+			onRestart: jest.fn(),
+		};
+		render(<Counters {...props}></Counters>);
+		const counters = screen.queryAllByText('Mocked Counter');
+		expect(counters).toHaveLength(0);
+	});
+
+	test(`Triggers onReset`, () => {
+		const props = {
+			counters: [
+				{ value: 10, id: 1 },
+				{ value: 20, id: 2 },
+				{ value: 30, id: 3 },
+			],
+			onReset: jest.fn(),
+			onRestart: jest.fn(),
+		};
+		render(<Counters {...props}></Counters>);
+		const button = screen.getByRole('button', { name: 'refresh' });
+		userEvent.click(button);
+		expect(props.onReset).toHaveBeenCalledTimes(1);
+	});
+
+	test(`Triggers onRestart`, () => {
+		const props = {
+			counters: [],
+			onReset: jest.fn(),
+			onIncrement: jest.fn(),
+			onDelete: jest.fn(),
+			onDecrement: jest.fn(),
+			onRestart: jest.fn(),
+		};
+
+		render(<Counters {...props}></Counters>);
+		const button = screen.getByRole('button', { name: 'restart' });
+		expect(button).toBeEnabled();
+		userEvent.click(button);
+		expect(props.onRestart).toHaveBeenCalledTimes(1);
 	});
 });

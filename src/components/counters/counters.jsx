@@ -15,6 +15,7 @@ class Counters extends Component {
 				</button>
 				<button
 					className="btn btn-primary m-2"
+					aria-label="restart"
 					onClick={onRestart}
 					disabled={counters.length !== 0 ? 'disabled' : ''}>
 					<i className="fa fa-recycle" aria-hidden="true" />

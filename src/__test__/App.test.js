@@ -3,9 +3,9 @@ import App from '../App';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import '@testing-library/jest-dom';
-import { render, fireEvent, screen, waitForElementToBeRemoved, waitFor } from '@testing-library/react';
-import renderer from 'react-test-renderer';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import renderer from 'react-test-renderer';
 
 describe('App', () => {
 	const { reload } = window.location;
@@ -48,7 +48,7 @@ describe('App', () => {
 		render(<App></App>);
 		expect(screen.getAllByRole('button', { name: 'increment' })).toHaveLength(4);
 		const incrementCounter02 = screen.getAllByRole('button', { name: 'increment' })[1];
-		const decrementCounter02 = screen.getAllByRole('button', { name: 'Minus Button' })[1];
+		const decrementCounter02 = screen.getAllByRole('button', { name: 'decrement' })[1];
 		const counterDisplayCounter02 = screen.getAllByTestId('counterDisplay')[1];
 
 		userEvent.click(incrementCounter02);
@@ -62,7 +62,7 @@ describe('App', () => {
 		const deleteCounterButtons = screen.getAllByRole('button', { name: 'delete' });
 		expect(deleteCounterButtons).toHaveLength(4);
 		const deleteCounter04 = deleteCounterButtons[3];
-		fireEvent.click(deleteCounter04);
+		userEvent.click(deleteCounter04);
 		expect(screen.getAllByTestId('counter')).toHaveLength(3);
 	});
 
@@ -70,7 +70,7 @@ describe('App', () => {
 		render(<App></App>);
 		const incrementButtons = screen.getAllByRole('button', { name: 'increment' });
 		expect(incrementButtons).toHaveLength(4);
-		for (let element of incrementButtons) fireEvent.click(element);
+		for (let element of incrementButtons) userEvent.click(element);
 		expect(screen.getByTestId('cart')).toHaveTextContent('4');
 	});
 
@@ -78,8 +78,8 @@ describe('App', () => {
 		render(<App></App>);
 		const resetButton = screen.getByRole('button', { name: 'refresh' });
 		const incrementButtons = screen.getAllByRole('button', { name: 'increment' });
-		for (const button of incrementButtons) fireEvent.click(button);
-		fireEvent.click(resetButton);
+		for (const button of incrementButtons) userEvent.click(button);
+		userEvent.click(resetButton);
 		expect(screen.queryAllByTestId('counter')).toHaveLength(4);
 	});
 
@@ -87,9 +87,9 @@ describe('App', () => {
 		render(<App></App>);
 		const resetButton = screen.getByRole('button', { name: 'restart' });
 		const deleteButtons = screen.getAllByRole('button', { name: 'delete' });
-		for (const button of deleteButtons) fireEvent.click(button);
+		for (const button of deleteButtons) userEvent.click(button);
 		expect(screen.queryAllByTestId('counter')).toHaveLength(0);
-		fireEvent.click(resetButton);
+		userEvent.click(resetButton);
 		expect(window.location.reload).toHaveBeenCalled();
 	});
 });

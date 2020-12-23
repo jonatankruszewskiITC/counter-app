@@ -3,9 +3,8 @@ import NavBar from '../navbar';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import '@testing-library/jest-dom';
-import { render, fireEvent, screen, cleanup } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import renderer from 'react-test-renderer';
-import userEvent from '@testing-library/user-event';
 
 describe('Navbar', () => {
 	test(`Testing Component doesn't Crash`, () => {

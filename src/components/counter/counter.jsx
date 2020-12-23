@@ -29,7 +29,7 @@ class Counter extends Component {
 							<i className="fa fa-plus-circle" aria-hidden="true" />
 						</button>
 						<button
-							aria-label="Minus Button"
+							aria-label="decrement"
 							className="btn btn-info m-2"
 							onClick={() => this.props.onDecrement(this.props.counter)}
 							disabled={this.props.counter.value === 0 ? 'disabled' : ''}>

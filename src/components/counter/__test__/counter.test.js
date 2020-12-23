@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import '@testing-library/jest-dom';
 import '@testing-library/user-event';
 
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import renderer from 'react-test-renderer';
 
 import Counter from '../counter';
@@ -68,7 +68,7 @@ describe('It Renders without Crashing', () => {
 			onDelete: jest.fn(),
 		};
 		render(<Counter {...props}></Counter>);
-		userEvent.click(screen.getByRole('button', { name: 'Minus Button' }));
+		userEvent.click(screen.getByRole('button', { name: 'decrement' }));
 		expect(props.onDecrement).toHaveBeenCalledTimes(1);
 	});
 
@@ -80,7 +80,7 @@ describe('It Renders without Crashing', () => {
 			onDelete: jest.fn(),
 		};
 		render(<Counter {...props}></Counter>);
-		fireEvent.click(screen.getByRole('button', { name: 'delete' }));
+		userEvent.click(screen.getByRole('button', { name: 'delete' }));
 		expect(props.onDelete).toHaveBeenCalledTimes(1);
 	});
 });
